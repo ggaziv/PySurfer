@@ -951,7 +951,7 @@ class Brain(object):
         hemi = self._check_hemi(hemi)
         # load data here
         scalar_data, name = self._read_scalar_data(source, hemi, name=name)
-
+        scalar_data = np.nan_to_num(scalar_data)
         if self.patch_mode:
             scalar_data = self.geo[hemi].surf_to_patch_array(scalar_data)
 

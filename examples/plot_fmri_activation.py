@@ -8,14 +8,18 @@ a map of them defined on the Freesurfer surface. This map can be stored in any
 file format that Nibabel can understand.
 
 """
+import os
+os.environ['SUBJECTS_DIR'] = '/Users/admin/Dropbox (Weizmann Institute)/tunnel/freesurfer_subjects'
+from mayavi import mlab
 from surfer import Brain
 
 print(__doc__)
 
+fig = mlab.figure(size=(1000,550))
 """
 Bring up the visualization window.
 """
-brain = Brain("fsaverage", "lh", "inflated")
+brain = Brain("fsaverage", "lh", "inflated", figure=fig)
 
 """
 Get a path to the overlay file.
@@ -38,3 +42,5 @@ Now add the overlay again, but this time with set threshold and showing only
 the positive activations.
 """
 brain.add_overlay(overlay_file, min=5, max=20, sign="pos")
+
+mlab.savefig('test_fmri_activation.png',figure=fig,magnification=5) # save a high-res figure

@@ -13,10 +13,15 @@ from os.path import join
 import numpy as np
 from surfer import Brain
 from nibabel.freesurfer import read_label
+import os
+os.environ['SUBJECTS_DIR'] = '/Users/admin/Dropbox (Weizmann Institute)/tunnel/freesurfer_subjects'
+from mayavi import mlab
+
+fig = mlab.figure(size=(1000,550))
 
 print(__doc__)
 
-brain = Brain("fsaverage", "lh", "inflated")
+brain = Brain("fsaverage", "lh", "inflated", figure=fig)
 
 """
 Show the morphometry with a continuous grayscale colormap.
@@ -64,3 +69,5 @@ if brain.patch_mode:
     ids,probs=brain.geo['lh'].surf_to_patch_vertices(ids,probs)
 prob_field[ids] = probs
 brain.add_data(prob_field, thresh=1e-5, colormap="RdPu")
+
+mlab.savefig('test_probabilstic_label.png',figure=fig,magnification=5) # save a high-res figure

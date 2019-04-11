@@ -11,9 +11,15 @@ print(__doc__)
 
 fig = mlab.figure(size=(1000,550))
 
+# brain = Brain("fsaverage", "both", "cortex.patch.flat",
+#               subjects_dir='/usr/local/freesurfer/subjects',
+#               figure=fig,background='w')
 brain = Brain("fsaverage", "both", "cortex.patch.flat",
-              subjects_dir='/usr/local/freesurfer/subjects',
               figure=fig,background='w')
+# brain = Brain("Kamitani_sbj3", "both", "full.flat.patch.3d",
+#               subjects_dir='/usr/local/freesurfer/subjects',
+#               figure=fig,background='w')
+
 brain.add_label(label='V1_exvivo',hemi='lh')
 brain.add_label(label='V1_exvivo',hemi='rh')
 

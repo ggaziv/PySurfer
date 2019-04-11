@@ -11,7 +11,10 @@ the data.
 """
 import os
 from surfer import Brain, project_volume_data
+os.environ['SUBJECTS_DIR'] = '/Users/admin/Dropbox (Weizmann Institute)/tunnel/freesurfer_subjects'
+from mayavi import mlab
 
+fig = mlab.figure(size=(1000,550))
 print(__doc__)
 
 """Bring up the visualization"""
@@ -25,7 +28,7 @@ else:
     hemi="both"
 
 brain = Brain("fsaverage", hemi, surf,
-              views=views, background="white")
+              views=views, background="white", figure=fig)
 
 """Project the volume file and return as an array"""
 mri_file = "example_data/resting_corr.nii.gz"
@@ -82,3 +85,5 @@ seed in left angular gyrus. Let's plot that seed.
 """
 seed_coords = (-45, -67, 36)
 brain.add_foci(seed_coords, map_surface="white", hemi='lh')
+
+mlab.savefig('test_resting_correlations.png',figure=fig,magnification=5) # save a high-res figure

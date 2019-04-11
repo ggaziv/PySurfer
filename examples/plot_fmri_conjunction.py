@@ -14,13 +14,17 @@ import os.path as op
 import numpy as np
 from surfer import io
 from surfer import Brain
+import os
+os.environ['SUBJECTS_DIR'] = '/Users/admin/Dropbox (Weizmann Institute)/tunnel/freesurfer_subjects'
+from mayavi import mlab
 
+fig = mlab.figure(size=(1000,550))
 print(__doc__)
 
 """
 Initialize the visualization.
 """
-brain = Brain("fsaverage", "lh", "inflated", background="white")
+brain = Brain("fsaverage", "lh", "inflated", background="white", figure=fig)
 
 """
 Read both of the activation maps in using
@@ -76,3 +80,5 @@ get when you mix red and blue.
 brain.add_overlay(conjunct, 4, 30, name="conjunct")
 brain.overlays["conjunct"].pos_bar.lut_mode = "Purples"
 brain.overlays["conjunct"].pos_bar.visible = False
+
+mlab.savefig('test_fmri_conjunction.png',figure=fig,magnification=5) # save a high-res figure
